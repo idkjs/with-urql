@@ -6,9 +6,9 @@ import Company from "./company";
 const CompanyQuery = query(`
 {
   allCompanies {
-    id
-    name
-    twitter
+    id,
+    name,
+    twitter,
     logo
   }
 }
@@ -33,7 +33,7 @@ export default class Companies extends React.Component {
       <div>
         <Connect
           query={CompanyQuery}
-          render={({ loaded, data }) => {
+          render={({ loaded, data, error }) => {
             return loaded === false ? (
               "loading"
             ) : (
