@@ -1,11 +1,7 @@
-#urql
+#urqlV2
 
-#deployed
+##deployed
 
 * `yarn run build` and `surge build`
 
-* open: `https://lafrenctech-urql.surge.sh`
-
-## devDeps
-
-* `yarn add urql react-dom react`
+* open: `https://lafrenchtech-urlqlv2.surge.sh/`
