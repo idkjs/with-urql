@@ -1,0 +1,8 @@
+#import "./fragment.graphql"
+
+query Company($id: ID) {
+  Company(id: $id) {
+    id
+    ...CompanyFragment
+  }
+}
