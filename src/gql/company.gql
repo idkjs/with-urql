@@ -1,4 +1,4 @@
-#import "./fragment.graphql"
+#import "./fragment.gql"
 
 query Company($id: ID) {
   Company(id: $id) {

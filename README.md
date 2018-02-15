@@ -1,4 +1,5 @@
-#urql
+#micro.graphql
+see https://reactjs.org/docs/higher-order-components.html for company.js
 
 #deployed
 

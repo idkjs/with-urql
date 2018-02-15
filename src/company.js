@@ -1,43 +1,43 @@
-// import React from "react";
-// import { graphql } from "react-apollo";
-// import { loader } from "graphql.macro";
+import React from "react";
+import { graphql } from "react-apollo";
+import { loader } from "graphql.macro";
 
-// const QueryString = `
-// query Company($id: ID) {
-//   Company(id: $id) {
-//     id
-//     name
-//     description
-//     sector
-//     logo
-//   }
+const CompanyIdQuery = loader("./gql/company.gql");
+
+// function Company({ id }) {
+//   return (
+//     <h6>
+//       {Company.name}: {Company.description}
+//     </h6>
+//   );
 // }
-// `;
+function CompanyCom({ loaded, props, data, id, onClose }) {
+  console.log(id);
+  console.log(props);
+  console.log("DATA: ", data);
+  const { Company } = data;
+  console.log("COMPANY", Company);
+  // console.log(CompanyIdQuery);
+  return (
+    // const { Company } = data,
 
-// const CompanyQuery = loader("./graphql/company.gql");
+    <div className="modal">
+      {loaded === false ? (
+        <p>Loading</p>
+      ) : (
+        (console.log("DATA", data.Company),
+        (
+          <div>
+            {/* <h2>{data.Company.name}</h2> */}
+            <pre>{JSON.stringify(Company, null, 2)}</pre>
+            {/* <h3>{Company.description}</h3>
+        <p>{Company.id}</p> */}
+            <button onClick={onClose}>Close</button>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
 
-// const Company = ({ id, onClose }) => (
-//   <div>
-//     <Connect
-//       query={graphql(CompanyQuery)}
-//       query={query(QueryString, { id: id })}
-//       render={({ loaded, data }) => {
-//         return (
-//           <div className="modal">
-//             {loaded === false ? (
-//               <p>Loading</p>
-//             ) : (
-//               <div>
-//                 <h2>{data.Company.name}</h2>
-//                 <p>{data.Company.description}</p>
-//                 <button onClick={onClose}>Close</button>
-//               </div>
-//             )}
-//           </div>
-//         );
-//       }}
-//     />
-//   </div>
-// );
-
-// export default Company;
+export default graphql(CompanyIdQuery)(CompanyCom);
