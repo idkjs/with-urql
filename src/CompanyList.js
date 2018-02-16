@@ -1,8 +1,7 @@
 import React from "react";
-// import { gql } from "apollo-boost";
-// import { Query } from "react-apollo";
-import Loading from "./Loading";
-import Error from "./Error";
+// import Loading from "./Loading";
+// import Error from "./Error";
+import Company from "./company";
 
 class CompanyList extends React.Component {
   state = {
@@ -40,9 +39,9 @@ class CompanyList extends React.Component {
             </li>
           ))}
         </ul>
-        {/* {this.state.selected && (
+        {this.state.selected && (
           <Company id={this.state.selected} onClose={this.unsetSelected} />
-        )} */}
+        )}
       </div>
     );
   }

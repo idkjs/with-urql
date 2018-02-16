@@ -19,6 +19,7 @@ const CO_QUERY = gql`
     description
     sector
     logo
+    twitter
   }
 `;
 

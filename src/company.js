@@ -1,43 +1,42 @@
 import React from "react";
-import { graphql } from "react-apollo";
-import { loader } from "graphql.macro";
 
-const CompanyIdQuery = loader("./gql/company.gql");
+import { gql } from "apollo-boost";
+import { Query } from "react-apollo";
+import { Fetching } from "./Fetching";
+import Error from "./Error";
 
-// function Company({ id }) {
-//   return (
-//     <h6>
-//       {Company.name}: {Company.description}
-//     </h6>
-//   );
-// }
-function CompanyCom({ loaded, props, data, id, onClose }) {
-  console.log(id);
-  console.log(props);
-  console.log("DATA: ", data);
-  const { Company } = data;
-  console.log("COMPANY", Company);
-  // console.log(CompanyIdQuery);
-  return (
-    // const { Company } = data,
+const CO_ID_QUERY = gql`
+  query Company($id: ID) {
+    company(where: { id: $id }) {
+      id
+      ...CompanyFragment
+    }
+  }
 
-    <div className="modal">
-      {loaded === false ? (
-        <p>Loading</p>
-      ) : (
-        (console.log("DATA", data.Company),
-        (
+  fragment CompanyFragment on Company {
+    name
+    description
+    sector
+    logo
+  }
+`;
+
+const Company = ({ id, onClose }) => (
+  <Query query={CO_ID_QUERY} variables={{ id }}>
+    {({ loading, error, data }) => {
+      if (loading) return <Fetching />;
+      if (error) return <Error />;
+      return (
+        <div className="modal">
           <div>
-            {/* <h2>{data.Company.name}</h2> */}
-            <pre>{JSON.stringify(Company, null, 2)}</pre>
-            {/* <h3>{Company.description}</h3>
-        <p>{Company.id}</p> */}
+            <h2>{data.company.name}</h2>
+            <p>{data.company.description}</p>
             <button onClick={onClose}>Close</button>
           </div>
-        ))
-      )}
-    </div>
-  );
-}
+        </div>
+      );
+    }}
+  </Query>
+);
 
-export default graphql(CompanyIdQuery)(CompanyCom);
+export default Company;
